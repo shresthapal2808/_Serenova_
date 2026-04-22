@@ -1,0 +1,102 @@
+{% extends "serenova/base.html" %}
+{% load static %}
+
+{% block content %}
+
+<link rel="stylesheet" href="{% static 'css/soundscaping.css' %}">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+
+<div class="sc-wrap">
+
+  <!-- AMBIENT RINGS -->
+  <div class="ring ring-1"></div>
+  <div class="ring ring-2"></div>
+  <div class="ring ring-3"></div>
+
+  <!-- FLOATING PARTICLES -->
+  <div class="particles">
+    <span></span><span></span><span></span>
+    <span></span><span></span><span></span>
+  </div>
+
+  <div class="sc-inner">
+
+    <!-- HEADER -->
+    <header class="sc-header">
+      <p class="sc-eyebrow">serenova · soundscape</p>
+      <h1 class="sc-title">Build Your<br><em>Calm</em></h1>
+      <p class="sc-sub">Layer sounds. Find stillness.</p>
+    </header>
+
+    <!-- SEARCH -->
+    <div class="search-row">
+      <div class="search-field">
+        <svg class="search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        <input id="searchInput" placeholder="rain · forest · piano · ocean…" />
+      </div>
+      <button type= "button" class="search-btn" onclick="searchSounds()">Search</button>
+    </div>
+
+    <!-- RESULTS -->
+    <div id="soundLibrary" class="sound-library"></div>
+
+    <!-- MIXER -->
+    <div class="mixer-section" id="mixerSection" style="display:none">
+      <div class="mixer-header">
+        <span class="mixer-label">Your Mix</span>
+        <div class="mixer-controls">
+          <button class="ctrl-btn play-btn" onclick="playAll()">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="5,3 19,12 5,21"/></svg>
+            Play
+          </button>
+          <button class="ctrl-btn stop-btn" onclick="stopAll()">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="6" width="12" height="12" rx="1"/></svg>
+            Stop
+          </button>
+          <button class="ctrl-btn save-btn" onclick="saveMix()">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v11a2 2 0 01-2 2z"/><polyline points="17,21 17,13 7,13 7,21"/><polyline points="7,3 7,8 15,8"/></svg>
+            Save
+          </button>
+        </div>
+      </div>
+      <div id="mixer" class="mixer-tracks"></div>
+    </div>
+
+    <!-- SAVED MIXES -->
+    {% if mixes %}
+    <div class="saved-section">
+      <p class="saved-label">your soundscapes</p>
+      <div class="saved-list">
+        {% for mix in mixes %}
+        <div class="mix-card">
+          <div class="mix-info">
+            <span class="mix-dot"></span>
+            <span class="mix-name">{{ mix.name }}</span>
+          </div>
+          <button class="mix-play-btn" onclick='loadMix(`{{ mix.sounds|escapejs }}`)'>
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><polygon points="5,3 19,12 5,21"/></svg>
+            Play
+          </button>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+    {% endif %}
+
+  </div>
+</div>
+
+{% block scripts %}
+<script>
+  const SAVE_MIX_URL = "{% url 'save_mix' %}";
+  const IS_AUTHENTICATED = {{ user.is_authenticated|yesno:"true,false" }};
+
+  function getCSRFToken() {
+    return document.cookie.split('; ')
+      .find(row => row.startsWith('csrftoken'))
+      ?.split('=')[1];
+  }
+</script>
+<script src="{% static 'js/soundscape.js'%}"></script>
+{% endblock %}
+{% endblock %}

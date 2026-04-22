@@ -1,0 +1,222 @@
+{% extends "serenova/base.html" %}
+{% load static %}
+
+{% block styles %}
+<link rel="stylesheet" href="{% static 'css/about.css' %}" />
+{% endblock %}
+
+{% block body_class %}about-page{% endblock %}
+
+{% block content %}
+
+<canvas id="bg-canvas"></canvas>
+
+<div class="ab-page">
+
+  <!-- ══════════════ HERO ══════════════ -->
+  <section class="ab-hero">
+
+    <div class="ab-orbit ab-orbit-1"></div>
+    <div class="ab-orbit ab-orbit-2"></div>
+    <div class="ab-orbit ab-orbit-3"></div>
+
+    <div class="ab-hero-inner">
+      <span class="ab-eyebrow">Our Story · Our Purpose</span>
+
+      <div class="ab-logo-wrap">
+        <img class="ab-logo" src="{% static 'images/logo.png' %}" alt="Serenova" />
+      </div>
+
+      <p class="ab-tagline">Peace · Clarity · Renewal</p>
+
+      <p class="ab-desc">
+        A sanctuary built for the weary, the anxious, and the searching —
+        where stillness is not a luxury but a gentle, everyday practice.
+      </p>
+
+      <div class="ab-scroll-hint">
+        <span>Scroll to explore</span>
+        <div class="ab-scroll-line"></div>
+      </div>
+    </div>
+
+  </section>
+
+
+  <!-- ══════════════ MISSION ══════════════ -->
+  <section class="ab-mission ab-reveal">
+
+    <div class="ab-mission-text">
+      <span class="ab-label">Why We Exist</span>
+      <h2>Born from stillness,<br>built for you</h2>
+      <p>In a world that never stops scrolling, Serenova was born from a simple
+         belief — that every person deserves a private corner of the internet that
+         asks nothing of them except to breathe.</p>
+      <p>We built this not as a product, but as a promise: that technology can
+         hold space for your softest, most vulnerable moments.</p>
+      <p>Serenova is not about being fixed. It's about being heard — by yourself,
+         first and foremost.</p>
+    </div>
+
+    <div class="ab-mission-visual">
+      <div class="ab-orb">
+        <div class="ab-orb-text">Peace<br>✦<br>Clarity<br>✦<br>Renewal</div>
+      </div>
+    </div>
+
+  </section>
+
+  <div class="ab-divider">
+    <span></span><i class="sm"></i><i></i><i class="sm"></i><span></span>
+  </div>
+
+
+  <!-- ══════════════ FEATURES ══════════════ -->
+  <section class="ab-features ab-reveal">
+    <span class="ab-eyebrow-sm">What We Offer</span>
+    <h2 class="ab-section-title">A complete sanctuary</h2>
+    <p class="ab-section-sub">Six pathways to your inner calm</p>
+
+    <div class="ab-grid">
+      <div class="ab-feat-card">
+        <span class="ab-feat-emoji">🎵</span>
+        <h3>Soundscaping</h3>
+        <p>Craft your perfect calm with our interactive sound mixer. Layer rain,
+           wind, bowls, and birdsong into your personal soundscape.</p>
+        <div class="ab-feat-glow"></div>
+      </div>
+      <div class="ab-feat-card">
+        <span class="ab-feat-emoji">🌙</span>
+        <h3>Mood Tracking</h3>
+        <p>Track how you feel each day. Discover patterns in your emotional
+           landscape and learn what truly lifts or drains you.</p>
+        <div class="ab-feat-glow"></div>
+      </div>
+      <div class="ab-feat-card">
+        <span class="ab-feat-emoji">✨</span>
+        <h3>Daily Affirmations</h3>
+        <p>AI-curated quotes and affirmations tailored to your current mood.
+           Words that arrive exactly when you need them most.</p>
+        <div class="ab-feat-glow"></div>
+      </div>
+      <div class="ab-feat-card">
+        <span class="ab-feat-emoji">🫂</span>
+        <h3>Wellness Community</h3>
+        <p>Share your thoughts and find support in our gentle, moderated space.
+           You are never alone in what you feel.</p>
+        <div class="ab-feat-glow"></div>
+      </div>
+      <div class="ab-feat-card">
+        <span class="ab-feat-emoji">📓</span>
+        <h3>Private Journal</h3>
+        <p>Your own sacred space to write freely. No audience, no pressure —
+           just you, your thoughts, and the page.</p>
+        <div class="ab-feat-glow"></div>
+      </div>
+      <div class="ab-feat-card">
+        <span class="ab-feat-emoji">💭</span>
+        <h3>Mental Insights</h3>
+        <p>Gentle reflections drawn from your journal and mood data, helping
+           you understand yourself a little more each day.</p>
+        <div class="ab-feat-glow"></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="ab-divider">
+    <span></span><i class="sm"></i><i></i><i class="sm"></i><span></span>
+  </div>
+
+
+  <!-- ══════════════ PHILOSOPHY ══════════════ -->
+  <section class="ab-philosophy ab-reveal">
+    <div class="ab-phil-inner">
+
+      <div class="ab-phil-left">
+        <span class="ab-label">Our Beliefs</span>
+        <h2>The values that<br>hold us together</h2>
+      </div>
+
+      <div class="ab-phil-right">
+        <div class="ab-value">
+          <span class="ab-value-num">01</span>
+          <h3>Privacy is sacred</h3>
+          <p>Your journal is yours alone. Your thoughts are never shared, sold,
+             or seen by anyone. We treat your inner world with the reverence it
+             deserves.</p>
+        </div>
+        <div class="ab-value">
+          <span class="ab-value-num">02</span>
+          <h3>Gentleness over hustle</h3>
+          <p>We reject the productivity-at-all-costs culture. Rest is not
+             laziness. Stillness is not emptiness. We celebrate the quiet act
+             of simply being.</p>
+        </div>
+        <div class="ab-value">
+          <span class="ab-value-num">03</span>
+          <h3>Community without pressure</h3>
+          <p>Our community spaces are optional, moderated, and kind. Share when
+             you want. Lurk when you need. There is no obligation here.</p>
+        </div>
+        <div class="ab-value">
+          <span class="ab-value-num">04</span>
+          <h3>Technology as a tool, not a trap</h3>
+          <p>Serenova is designed to give you what you need and let you go.
+             We will never use dark patterns, infinite scroll, or addictive
+             mechanics.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ══════════════ QUOTE ══════════════ -->
+  <div class="ab-quote-strip">
+    <p class="ab-big-quote">
+      "Pause the noise. <em>Reconnect with yourself.</em><br>
+      That is all we ever really needed."
+    </p>
+    <p class="ab-quote-attr">— Serenova</p>
+  </div>
+
+
+  <!-- ══════════════ CREATOR ══════════════ -->
+  <section class="ab-creator ab-reveal">
+    <span class="ab-eyebrow-sm">The Maker</span>
+    <h2 class="ab-section-title">Behind the stillness</h2>
+    <p class="ab-section-sub">
+      Built with love, late nights, and a deep belief in digital kindness.
+    </p>
+
+    <div class="ab-creator-card">
+      <div class="ab-avatar">S</div>
+      <p class="ab-creator-name">Shrestha</p>
+      <p class="ab-creator-role">Founder · Designer · Developer</p>
+      <p class="ab-creator-bio">
+        Serenova began as a personal project — a quiet wish for a calmer space
+        on the internet. It grew slowly, shaped with care and intention, guided
+        by one question:
+        <em>"What would I want to find when I'm not okay?"</em>
+      </p>
+      <div class="ab-creator-divider">
+        <span></span><i></i><span></span>
+      </div>
+      <div class="ab-creator-tags">
+        <span class="ab-tag">Django</span>
+        <span class="ab-tag">Python</span>
+        <span class="ab-tag">HTML · CSS</span>
+        <span class="ab-tag">JavaScript</span>
+        <span class="ab-tag">REST API</span>
+        <span class="ab-tag">💜 Mental Wellness</span>
+      </div>
+    </div>
+  </section>
+
+</div><!-- /ab-page -->
+
+{% endblock %}
+
+{% block scripts %}
+<script src="{% static 'js/about.js' %}"></script>
+{% endblock %}

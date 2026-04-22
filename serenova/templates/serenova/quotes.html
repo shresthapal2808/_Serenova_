@@ -1,0 +1,150 @@
+{% extends "serenova/base.html" %}
+{% load static %}
+
+{% block styles %}
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="{% static 'css/quotes.css' %}" />
+{% endblock %}
+
+{% block content %}
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const canvas = document.getElementById("bg-canvas");
+        if (canvas) {
+            canvas.style.display = "none";
+        }
+    });
+</script>
+
+
+<div class="page-wrap">
+  <!-- BG blobs (hidden via CSS, canvas handles bg) -->
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+  <div class="blob blob-3"></div>
+
+  <div class="card">
+    <div class="card-header">
+      <p class="subtitle">daily check-in</p>
+      <h1>How are you feeling<br /><em>today?</em></h1>
+    </div>
+
+    <!-- MOOD BUTTONS -->
+    <div class="moods">
+      <button class="mood-btn" data-mood="happy" onclick="selectMood('happy')">
+        <span class="emoji">😊</span>
+        <span class="label">Happy</span>
+      </button>
+      <button class="mood-btn" data-mood="sad" onclick="selectMood('sad')">
+        <span class="emoji">😔</span>
+        <span class="label">Sad</span>
+      </button>
+      <button class="mood-btn" data-mood="anxious" onclick="selectMood('anxious')">
+        <span class="emoji">😰</span>
+        <span class="label">Anxious</span>
+      </button>
+      <button class="mood-btn" data-mood="stressed" onclick="selectMood('stressed')">
+        <span class="emoji">😤</span>
+        <span class="label">Stressed</span>
+      </button>
+      <button class="mood-btn" data-mood="tired" onclick="selectMood('tired')">
+        <span class="emoji">😴</span>
+        <span class="label">Tired</span>
+      </button>
+    </div>
+
+    <!-- AI NOTE -->
+    <h4 id="aiNote" class="ai-note" style="display:none;">
+      ✨ AI-generated quote for your mood
+    </h4>
+
+    <!-- QUOTE BOX -->
+    <div id="quoteBox" class="quote-box idle">
+      <div class="quote-inner">
+        <span class="quote-mark">"</span>
+        <p id="quoteText">Select your mood to receive a quote made just for you.</p>
+        <small id="quoteAuthor"></small>
+      </div>
+    </div>
+
+    <!-- NEW QUOTE BUTTON -->
+    <button id="newQuoteBtn" onclick="getNewQuote()" class="new-btn" style="display:none;">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+        <path d="M23 4v6h-6"/>
+        <path d="M1 20v-6h6"/>
+        <path d="M3.51 9a9 9 0 0114.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0020.49 15"/>
+      </svg>
+      New Quote
+    </button>
+  </div>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+  let currentMood = null;
+  let todayMoodSaved = false;
+
+  window.selectMood = async function (mood) {
+    currentMood = mood;
+
+    document.querySelectorAll('.mood-btn').forEach(b => b.classList.remove('active'));
+    document.querySelector(`[data-mood="${mood}"]`).classList.add('active');
+
+    setLoading();
+
+    await fetch(`/save-mood/?mood=${mood}`);
+    todayMoodSaved = true;
+
+    await getQuote(mood);
+
+    document.getElementById('newQuoteBtn').style.display = 'flex';
+  };
+
+  function setLoading() {
+    const box = document.getElementById('quoteBox');
+    box.className = 'quote-box loading';
+    box.innerHTML = `
+      <div class="quote-inner" style="width:100%">
+        <div class="loading-shimmer" style="width:80%"></div>
+        <div class="loading-shimmer" style="width:60%; margin-top:10px"></div>
+        <div class="loading-shimmer" style="width:40%; margin-top:10px"></div>
+      </div>`;
+  }
+
+  async function getQuote(mood) {
+    try {
+      const res = await fetch(`/get-quote/?mood=${mood}`);
+      const data = await res.json();
+
+      document.getElementById('aiNote').style.display = 'block';
+
+      const box = document.getElementById('quoteBox');
+      box.className = 'quote-box loaded';
+      box.innerHTML = `
+        <div class="quote-inner quote-appear">
+          <span class="quote-mark">"</span>
+          <p id="quoteText">${data.content}</p>
+          <small id="quoteAuthor">— ${data.author}</small>
+        </div>`;
+    } catch (e) {
+      const box = document.getElementById('quoteBox');
+      box.className = 'quote-box loaded';
+      box.innerHTML = `
+        <div class="quote-inner quote-appear">
+          <span class="quote-mark">"</span>
+          <p id="quoteText">Take a deep breath. You are doing okay.</p>
+          <small id="quoteAuthor">— Serenova</small>
+        </div>`;
+    }
+  }
+
+  window.getNewQuote = function () {
+    if (currentMood) {
+      setLoading();
+      getQuote(currentMood);
+    }
+  };
+</script>
+{% endblock %}

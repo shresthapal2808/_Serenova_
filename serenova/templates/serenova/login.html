@@ -1,0 +1,391 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Login - Serenova</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+    <style>
+      *, *::before, *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      :root {
+        --bg-deep:    #0b1120;
+        --bg-card:    #121c30;
+        --bg-input:   #1a2540;
+        --border:     rgba(139, 92, 246, 0.18);
+        --border-focus: rgba(139, 92, 246, 0.7);
+        --violet:     #8b5cf6;
+        --pink:       #ec4899;
+        --text:       #e8eaf6;
+        --muted:      #7b8db5;
+        --error:      #f87171;
+        --glow:       rgba(139, 92, 246, 0.25);
+      }
+
+      html, body {
+        height: 100%;
+      }
+
+      body {
+        font-family: 'DM Sans', sans-serif;
+        background-color: var(--bg-deep);
+        color: var(--text);
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 1rem;
+        position: relative;
+        overflow: hidden;
+      }
+
+      /* Ambient background orbs */
+      body::before,
+      body::after {
+        content: '';
+        position: fixed;
+        border-radius: 50%;
+        filter: blur(90px);
+        pointer-events: none;
+        z-index: 0;
+      }
+      body::before {
+        width: min(500px, 80vw);
+        height: min(500px, 80vw);
+        background: radial-gradient(circle, rgba(139,92,246,0.18) 0%, transparent 70%);
+        top: -15%;
+        right: -10%;
+      }
+      body::after {
+        width: min(400px, 70vw);
+        height: min(400px, 70vw);
+        background: radial-gradient(circle, rgba(236,72,153,0.12) 0%, transparent 70%);
+        bottom: -10%;
+        left: -8%;
+      }
+
+      /* Subtle noise grain overlay */
+      .grain {
+        position: fixed;
+        inset: 0;
+        z-index: 0;
+        pointer-events: none;
+        opacity: 0.03;
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+        background-size: 200px;
+      }
+
+      /* Card */
+      .card {
+        position: relative;
+        z-index: 1;
+        width: 100%;
+        max-width: 420px;
+        background: var(--bg-card);
+        border: 1px solid var(--border);
+        border-radius: 20px;
+        padding: clamp(2rem, 6vw, 2.8rem) clamp(1.5rem, 6vw, 2.5rem);
+        box-shadow:
+          0 0 0 1px rgba(255,255,255,0.04) inset,
+          0 40px 80px rgba(0,0,0,0.5),
+          0 0 60px var(--glow);
+        animation: fadeUp 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+      }
+
+      @keyframes fadeUp {
+        from { opacity: 0; transform: translateY(28px); }
+        to   { opacity: 1; transform: translateY(0); }
+      }
+
+      /* Logo area */
+      .logo-wrap {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 2rem;
+        gap: 0.5rem;
+        animation: fadeUp 0.55s 0.05s cubic-bezier(0.22,1,0.36,1) both;
+      }
+
+      .logo-img {
+        width: 160px;
+        height: 160px;
+        object-fit: contain;
+        mix-blend-mode: lighten;
+        filter: drop-shadow(0 0 22px rgba(139, 92, 246, 0.55));
+        margin-bottom: -16px;
+      }
+
+
+
+      /* Heading */
+      h2 {
+        font-family: 'Cormorant Garamond', serif;
+        font-size: clamp(1.6rem, 4vw, 2rem);
+        font-weight: 300;
+        letter-spacing: 0.02em;
+        text-align: center;
+        margin-bottom: 0.4rem;
+        animation: fadeUp 0.55s 0.1s cubic-bezier(0.22,1,0.36,1) both;
+      }
+
+      .subtitle {
+        text-align: center;
+        font-size: 0.82rem;
+        color: var(--muted);
+        letter-spacing: 0.04em;
+        margin-bottom: 1.8rem;
+        animation: fadeUp 0.55s 0.15s cubic-bezier(0.22,1,0.36,1) both;
+      }
+
+      /* Divider */
+      .divider {
+        height: 1px;
+        background: linear-gradient(90deg, transparent, var(--border), transparent);
+        margin-bottom: 1.8rem;
+        animation: fadeUp 0.55s 0.18s cubic-bezier(0.22,1,0.36,1) both;
+      }
+
+      /* Form */
+      .form-group {
+        margin-bottom: 1.1rem;
+        animation: fadeUp 0.55s 0.22s cubic-bezier(0.22,1,0.36,1) both;
+      }
+
+      .form-group:nth-child(2) { animation-delay: 0.28s; }
+
+      label {
+        display: block;
+        font-size: 0.75rem;
+        font-weight: 500;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--muted);
+        margin-bottom: 0.45rem;
+      }
+
+      .input-wrap {
+        position: relative;
+      }
+
+      .input-wrap svg {
+        position: absolute;
+        left: 14px;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 16px;
+        height: 16px;
+        stroke: var(--muted);
+        fill: none;
+        stroke-width: 1.8;
+        pointer-events: none;
+        transition: stroke 0.2s;
+      }
+
+      input[type="text"],
+      input[type="password"] {
+        width: 100%;
+        padding: 0.75rem 0.9rem 0.75rem 2.6rem;
+        background: var(--bg-input);
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        color: var(--text);
+        font-family: 'DM Sans', sans-serif;
+        font-size: 0.92rem;
+        transition: border-color 0.2s, box-shadow 0.2s;
+        -webkit-appearance: none;
+      }
+
+      input::placeholder { color: rgba(123,141,181,0.5); }
+
+      input:focus {
+        outline: none;
+        border-color: var(--border-focus);
+        box-shadow: 0 0 0 3px rgba(139,92,246,0.14);
+      }
+
+      input:focus + svg,
+      .input-wrap:focus-within svg {
+        stroke: var(--violet);
+      }
+
+      /* Password toggle */
+      .toggle-pw {
+        position: absolute;
+        right: 13px;
+        top: 50%;
+        transform: translateY(-50%);
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 2px;
+        color: var(--muted);
+        display: flex;
+        transition: color 0.2s;
+      }
+      .toggle-pw:hover { color: var(--violet); }
+      .toggle-pw svg {
+        width: 16px;
+        height: 16px;
+        stroke: currentColor;
+        fill: none;
+        stroke-width: 1.8;
+        position: static;
+        transform: none;
+      }
+
+      /* Forgot password */
+      .forgot-row {
+        display: flex;
+        justify-content: flex-end;
+        margin-top: 0.35rem;
+      }
+      .forgot-row a {
+        font-size: 0.75rem;
+        color: var(--muted);
+        text-decoration: none;
+        transition: color 0.2s;
+      }
+      .forgot-row a:hover { color: var(--violet); }
+
+      /* Submit button */
+      .btn-login {
+        width: 100%;
+        padding: 0.82rem;
+        margin-top: 1.6rem;
+        background: linear-gradient(90deg, var(--violet), var(--pink));
+        color: white;
+        border: none;
+        border-radius: 10px;
+        font-family: 'DM Sans', sans-serif;
+        font-size: 0.9rem;
+        font-weight: 500;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        cursor: pointer;
+        position: relative;
+        overflow: hidden;
+        transition: opacity 0.2s, transform 0.15s, box-shadow 0.2s;
+        box-shadow: 0 4px 20px rgba(139,92,246,0.35);
+        animation: fadeUp 0.55s 0.35s cubic-bezier(0.22,1,0.36,1) both;
+      }
+
+      .btn-login::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(90deg, rgba(255,255,255,0.12), rgba(255,255,255,0));
+        opacity: 0;
+        transition: opacity 0.2s;
+      }
+
+      .btn-login:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 8px 28px rgba(139,92,246,0.5);
+      }
+      .btn-login:hover::before { opacity: 1; }
+      .btn-login:active { transform: translateY(0); }
+
+      /* Register link */
+      .register-link {
+        margin-top: 1.4rem;
+        text-align: center;
+        font-size: 0.82rem;
+        color: var(--muted);
+        animation: fadeUp 0.55s 0.4s cubic-bezier(0.22,1,0.36,1) both;
+      }
+
+      .register-link a {
+        color: #c084fc;
+        text-decoration: none;
+        font-weight: 500;
+        transition: color 0.2s;
+      }
+      .register-link a:hover { color: var(--pink); }
+
+      /* Error list */
+      .errorlist {
+        color: var(--error);
+        font-size: 0.78rem;
+        margin-top: 0.35rem;
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+      }
+
+      /* Responsive tweaks */
+      @media (max-width: 400px) {
+        .card {
+          border-radius: 16px;
+        }
+      }
+
+      @media (min-height: 800px) {
+        body { align-items: center; }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="grain"></div>
+
+    <div class="card">
+      <div class="logo-wrap">
+        <img
+          class="logo-img"
+          src={% static 'images/logo.png' %}
+          alt="Serenova"
+        />
+      </div>
+
+      <h2>Welcome Back</h2>
+      <p class="subtitle">Sign in to continue your journey</p>
+      <div class="divider"></div>
+
+      <form method="POST">
+        {% csrf_token %}
+        {{ form.non_field_errors }}
+
+        <div class="form-group">
+          <label for="username">Username</label>
+          <div class="input-wrap">
+            <input type="text" id="username" name="username" placeholder="Enter your username" required autocomplete="username" />
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="pointer-events:none;position:absolute;left:14px;top:50%;transform:translateY(-50%)">
+              <circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/>
+            </svg>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="password">Password</label>
+          <div class="input-wrap">
+            <input type="password" id="password" name="password" placeholder="Enter your password" required autocomplete="current-password" />
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="pointer-events:none;position:absolute;left:14px;top:50%;transform:translateY(-50%)">
+              <rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+            </svg>
+            <button type="button" class="toggle-pw" aria-label="Toggle password visibility" onclick="
+              const inp = document.getElementById('password');
+              inp.type = inp.type === 'password' ? 'text' : 'password';
+              this.querySelector('.eye-open').style.display = inp.type === 'text' ? 'none' : 'block';
+              this.querySelector('.eye-closed').style.display = inp.type === 'text' ? 'block' : 'none';
+            ">
+              <svg class="eye-open" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+              <svg class="eye-closed" viewBox="0 0 24 24" style="display:none"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/></svg>
+            </button>
+          </div>
+          <div class="forgot-row">
+            <a href="/forgot-password/">Forgot password?</a>
+          </div>
+        </div>
+
+        <button type="submit" class="btn-login">Sign In</button>
+      </form>
+
+      <p class="register-link">Don't have an account? <a href="/register/">Create one</a></p>
+    </div>
+  </body>
+</html>

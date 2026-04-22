@@ -1,0 +1,199 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Serenova</title>
+    <link rel="icon" href="{% static 'images/logo.png' %}" type="image/png" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Cinzel:wght@300;400;600&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    {% block styles %}{% endblock %}
+  </head>
+  <body>
+    <!-- ===== ANIMATED CANVAS BACKGROUND ===== -->
+    <canvas id="bg-canvas"></canvas>
+
+    <!-- ===== NAVBAR ===== -->
+    <!---->
+    <nav class="navbar" id="navbar">
+      {% comment %}
+      <div class="logo">
+        <img src="{% static 'images/logo.png' %}" alt="Serenova Logo" />
+        <span class="logo-name">SERENOVA</span>
+      </div>
+      {% endcomment %}
+      <a href="{% url 'home' %}" style="text-decoration: none; color: inherit">
+        <div class="logo">
+          <img src="{% static 'images/logo.png' %}" alt="Serenova Logo" />
+          <span class="logo-name">SERENOVA</span>
+        </div>
+      </a>
+      <div class="nav-links">
+        <a href="/">Home</a>
+        <a href="{% url 'community' %}">Community(without API)</a>
+        <a href="/soundscape">Soundscape</a>
+        <a href="/api_community">Community(API)</a>
+        <a href="/quotes">Quotes</a>
+        <a href="/about">About</a>
+      </div>
+
+      {% if user.is_authenticated %}
+      <div class="user-profile">
+        <img src="{% static 'images/user.png' %}" class="avatar" alt="User" />
+        <span class="username">{{ user.username }}</span>
+        <form action="{% url 'logout' %}" method="POST" style="display: inline">
+          {% csrf_token %}
+          <button type="submit" class="logout-btn">Logout</button>
+        </form>
+      </div>
+      {% else %}
+      <div class="auth-buttons">
+        <a href="{% url 'login' %}" class="login-btn">Login</a>
+        <a href="{% url 'register' %}" class="register-btn">Register</a>
+      </div>
+      {% endif %}
+    </nav>
+
+    <!-- ===== MAIN CONTENT ===== -->
+    <div class="page">
+      {% block content %}{% endblock %}
+
+      <!-- ===== FOOTER ===== -->
+      <footer class="footer">
+        <div class="footer-container">
+          <div class="footer-brand">
+            <h2>✦ Serenova</h2>
+            <p>
+              Your personal mental wellness space to relax, reflect, and grow.
+              Where peace meets purpose.
+            </p>
+          </div>
+          <div class="footer-links">
+            <h3>Quick Links</h3>
+            <a href="/">Home</a>
+            <a href="#features">Features</a>
+            <a href="{% url 'community' %}">Community</a>
+            <a href="/soundscape">Soundscape</a>
+          </div>
+          <div class="footer-contact">
+            <h3>Connect</h3>
+            <p class="email-link">
+              🔗
+              <a
+                href="https://www.linkedin.com/in/shrestha-pal-339523251/"
+                target="_blank"
+              >
+                LinkedIn
+              </a>
+              &nbsp;|&nbsp;
+              <a href="https://github.com/shresthapal2808" target="_blank">
+                GitHub
+              </a>
+            </p>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p style="color: white; font-size: 15px">
+            © 2026 Serenova — All rights reserved &nbsp;·&nbsp; Shrestha Pal ✦
+          </p>
+        </div>
+      </footer>
+    </div>
+
+    <!-- ===== GLOBAL CANVAS BACKGROUND SCRIPT ===== -->
+    <script>
+      (function () {
+        const canvas = document.getElementById("bg-canvas");
+        const ctx = canvas.getContext("2d");
+        let W, H;
+
+        function resize() {
+          W = canvas.width = window.innerWidth;
+          H = canvas.height = window.innerHeight;
+        }
+        resize();
+        window.addEventListener("resize", resize);
+
+        // Stars
+        const stars = Array.from({ length: 120 }, () => ({
+          x: Math.random(),
+          y: Math.random(),
+          r: Math.random() * 1.8 + 0.3,
+          phase: Math.random() * Math.PI * 2,
+          da: 0.002 + Math.random() * 0.003,
+        }));
+
+        // Orbs
+        const orbs = [
+          { x: 0.15, y: 0.2, r: 280, c: [92, 45, 142], a: 0.28, phase: 0 },
+          { x: 0.82, y: 0.45, r: 220, c: [201, 75, 143], a: 0.18, phase: 1.5 },
+          { x: 0.5, y: 0.8, r: 180, c: [155, 114, 208], a: 0.2, phase: 3 },
+          { x: 0.3, y: 0.65, r: 150, c: [224, 123, 181], a: 0.12, phase: 2 },
+        ];
+
+        function draw() {
+          ctx.clearRect(0, 0, W, H);
+
+          // Base gradient
+          const bg = ctx.createLinearGradient(0, 0, W, H);
+          bg.addColorStop(0, "#160826");
+          bg.addColorStop(0.35, "#1e0b36");
+          bg.addColorStop(0.7, "#170929");
+          bg.addColorStop(1, "#200d38");
+          ctx.fillStyle = bg;
+          ctx.fillRect(0, 0, W, H);
+
+          // Animated orbs
+          orbs.forEach((o) => {
+            o.phase += 0.003;
+            const ox = (o.x + Math.sin(o.phase) * 0.06) * W;
+            const oy = (o.y + Math.cos(o.phase * 0.7) * 0.05) * H;
+            const grad = ctx.createRadialGradient(ox, oy, 0, ox, oy, o.r);
+            grad.addColorStop(0, `rgba(${o.c[0]},${o.c[1]},${o.c[2]},${o.a})`);
+            grad.addColorStop(1, "rgba(0,0,0,0)");
+            ctx.fillStyle = grad;
+            ctx.beginPath();
+            ctx.arc(ox, oy, o.r, 0, Math.PI * 2);
+            ctx.fill();
+          });
+
+          // Twinkling stars
+          stars.forEach((s) => {
+            s.phase += s.da;
+            const alpha = 0.75 * (0.1 + 0.7 * (0.5 + 0.5 * Math.sin(s.phase)));
+            ctx.beginPath();
+            ctx.arc(s.x * W, s.y * H, s.r, 0, Math.PI * 2);
+            ctx.fillStyle = `rgba(255,255,255,${alpha})`;
+            ctx.fill();
+          });
+
+          requestAnimationFrame(draw);
+        }
+        draw();
+
+        // Navbar scroll darken
+        window.addEventListener("scroll", () => {
+          const nav = document.getElementById("navbar");
+          nav.style.background =
+            window.scrollY > 60 ? "rgba(10,3,20,0.95)" : "rgba(18,6,34,0.6)";
+        });
+      })();
+      {% comment %} function openEmail() {
+        window.open(
+          "https://mail.google.com/mail/?view=cm&fs=1&to=2004shrestha@gmail.com",
+          "_blank",
+        );
+      } {% endcomment %}
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    {% block scripts %}{% endblock %}
+  </body>
+</html>

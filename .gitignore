@@ -1,0 +1,33 @@
+# 🔐 Secrets
+.env
+.env.*
+
+# 🐍 Python cache
+__pycache__/
+*.py[cod]
+*.pyo
+
+# 🗃️ Database (local)
+db.sqlite3
+*.sqlite3
+
+# 📦 Virtual environment
+venv/
+env/
+ENV/
+.venv/
+
+# 📁 Static files (generated during deployment)
+staticfiles/
+media/
+
+# 🧪 Logs
+*.log
+
+# 🧾 OS junk
+.DS_Store
+Thumbs.db
+
+# 🛠️ IDE/editor
+.vscode/
+.idea/

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard - Serenova</title>
+    <style>
+        body {
+            background-color: #0F172A;
+            font-family: Arial;
+            color: #F8FAFC;
+        }
+
+        .container {
+            width: 80%;
+            margin: 50px auto;
+            text-align: center;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+        }
+
+        .card {
+            background: #1E293B;
+            padding: 20px;
+            margin: 20px;
+            border-radius: 12px;
+            box-shadow: 0 0 15px rgba(139, 92, 246, 0.2);
+        }
+
+        button {
+            padding: 10px 20px;
+            margin-top: 10px;
+            border: none;
+            border-radius: 8px;
+            background: linear-gradient(90deg, #8B5CF6, #EC4899);
+            color: white;
+            cursor: pointer;
+        }
+
+        button:hover {
+            opacity: 0.9;
+        }
+
+        a {
+            color: #C084FC;
+            text-decoration: none;
+            display: block;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <h1>🌊 Welcome, {{ user.username }}</h1>
+
+    <div class="card">
+        <h3>How are you feeling today?</h3>
+        <button>😊 Happy</button>
+        <button>😔 Sad</button>
+        <button>😣 Stressed</button>
+    </div>
+
+    <div class="card">
+        <h3>Relax & Refresh</h3>
+        <button>🎮 Play Game</button>
+        <button>🎵 Listen Music</button>
+        <button>📝 Journal</button>
+    </div>
+
+    <a href="/logout/">Logout</a>
+
+</div>
+
+</body>
+</html>

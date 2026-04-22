@@ -1,0 +1,163 @@
+{% extends "serenova/base.html" %}
+{% load static %}
+
+{% block styles %}
+  <link rel="stylesheet" href="{% static 'css/journal.css' %}" />
+  <!-- Google Fonts: Cormorant Garamond (display) + DM Sans (body) -->
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+{% endblock %}
+
+{% block content %}
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const canvas = document.getElementById("bg-canvas");
+        if (canvas) {
+            canvas.style.display = "none";
+        }
+    });
+</script>
+
+<!-- ─── HERO ─────────────────────────────────────── -->
+<section class="sn-journal-hero">
+  <p class="sn-label">Your private sanctuary</p>
+  <h1>Share your <em>thoughts</em><br>with yourself</h1>
+  <p class="sn-sub">Your words. Your space. Only you can see this.</p>
+</section>
+
+{% if user.is_authenticated %}
+<!-- ─── LOGGED-IN VIEW ─────────────────────────────── -->
+
+  <!-- Tabs: Write / History -->
+  <div class="sn-tabs">
+    <button class="sn-tab active" data-target="write">Write</button>
+    <button class="sn-tab"        data-target="history">My Entries</button>
+  </div>
+
+  <div class="sn-main">
+
+    <!-- ── WRITE PANEL ── -->
+    <section id="sn-panel-write">
+
+      <!-- Date + Mood -->
+      <div class="sn-date-bar">
+        <span class="sn-today">{{ today|date:"l, F j, Y" }}</span>
+        <div class="sn-mood-row">
+          <span class="sn-mood-label">MOOD</span>
+          <!-- Mood pills: clicking sets a hidden input value -->
+          {% for mood in moods %}
+            <button type="button"
+                    class="sn-mood-pill"
+                    onclick="pickMood(this)">{{ mood }}</button>
+          {% endfor %}
+        </div>
+      </div>
+
+      <!-- Journal textarea form -->
+      <form method="POST" action="{% url 'journal' %}" id="sn-journal-form">
+        {% csrf_token %}
+        <input type="hidden" name="mood" id="mood-input" value="">
+
+        <div class="sn-card">
+          <!-- macOS-style traffic light dots for aesthetics -->
+          <div class="sn-card-header">
+            <span class="sn-card-tag">Private Entry</span>
+          </div>
+
+          <textarea
+            name="content"
+            id="sn-textarea"
+            class="sn-textarea"
+            placeholder="Begin writing… but remember to select a mood first, otherwise your words won’t be saved."
+            oninput="onType(this)"
+          >{{ draft|default:'' }}</textarea>
+
+          <!-- Word count + progress bar -->
+          <div class="sn-char-bar">
+            <span class="sn-wordcount" id="sn-wordcount">0 words</span>
+            <div class="sn-progress"><div class="sn-progress-fill" id="sn-progress-fill"></div></div>
+          </div>
+        </div>
+
+        <!-- Action buttons -->
+        <div class="sn-actions">
+          <button type="button" class="sn-btn-ghost" onclick="clearDraft()">Clear</button>
+          <button type="submit"  class="sn-btn-save">Save Entry</button>
+        </div>
+
+      </form>
+
+      <!-- Success/error flash messages from Django -->
+      {% if messages %}
+        {% for msg in messages %}
+          <div class="sn-toast sn-toast--show">
+            <span class="sn-toast-icon">✦</span> {{ msg }}
+          </div>
+        {% endfor %}
+      {% endif %}
+
+    </section>
+
+    <!-- ── HISTORY PANEL ── -->
+    <section id="sn-panel-history" style="display:none;">
+
+      <div class="sn-history-header">
+        <span class="sn-history-title">Past entries</span>
+        <span class="sn-entry-count">{{ entries.count }} entr{{ entries.count|pluralize:"y,ies" }}</span>
+      </div>
+
+      {% for entry in entries %}
+        <div class="sn-entry-card">
+          <div class="sn-entry-meta">
+            <span class="sn-entry-date">{{ entry.created_at|date:"F j, Y" }}</span>
+            {% if entry.mood %}
+              <span class="sn-entry-mood">{{ entry.mood }}</span>
+            {% endif %}
+          </div>
+          <!-- Show first 200 chars as preview -->
+          <p class="sn-entry-preview">{{ entry.content|truncatechars:200 }}</p>
+
+          <!-- Edit / Delete actions (visible on hover via CSS) -->
+          <div class="sn-entry-actions">
+            <a href="{% url 'journal_edit' entry.pk %}" class="sn-btn-mini" style="background: white;">Edit</a>
+            <form method="POST" action="{% url 'journal_delete' entry.pk %}" style="display:inline;">
+              {% csrf_token %}
+              <button type="submit" class="sn-btn-mini danger"
+                onclick="return confirm('Delete this entry?')">Delete</button>
+            </form>
+          </div>
+        </div>
+      {% empty %}
+        <p class="sn-empty">No entries yet — start writing above ✦</p>
+      {% endfor %}
+
+    </section>
+
+  </div><!-- /sn-main -->
+
+{% else %}
+<!-- ─── GUEST VIEW ──────────────────────────────────
+     User is NOT logged in. Show the "Share your thoughts"
+     teaser with a login prompt. They cannot type anything. -->
+
+  <div class="sn-main">
+    <div class="sn-guest">
+      <div class="sn-lock-circle">🔒</div>
+      <h2 class="sn-guest-title">Share your thoughts</h2>
+      <p class="sn-guest-sub">
+        Your journal is a private space — only you can read it.<br>
+        Please log in to start writing and saving your reflections.
+      </p>
+      <a href="{% url 'login' %}?next={% url 'journal' %}" class="sn-btn-login">
+        Get Started
+      </a>
+    </div>
+  </div>
+
+{% endif %}
+
+{% endblock %}
+
+
+{% block scripts %}
+<script src="{% static 'js/journal.js' %}"></script>
+{% endblock %}

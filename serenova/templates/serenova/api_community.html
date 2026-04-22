@@ -1,0 +1,93 @@
+{% extends "serenova/base.html" %} {% load static %} {% block content %}
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const canvas = document.getElementById("bg-canvas");
+    if (canvas) {
+      canvas.style.display = "none";
+    }
+  });
+</script>
+
+<link rel="stylesheet" href="{% static 'css/api_community.css' %}" />
+
+<div class="api_community-container">
+  <!-- ── HEADER ── -->
+  <h2>Community <em>Space</em></h2>
+  <span class="page-tagline">No judgment. Just presence.</span>
+
+  <!-- ── SAFE BANNER ── -->
+  <div class="safe-banner">
+    <div class="safe-banner-icon">🛡️</div>
+    <div>
+      <span class="safe-banner-title">You are safe here</span>
+      <span class="safe-banner-desc">
+        Everything you share stays within this gentle circle. There is no wrong
+        way to feel. Speak freely — this space holds you without judgment.
+      </span>
+    </div>
+  </div>
+
+  <!-- ── POST FORM ── -->
+  <select id="mood-filter">
+    <option value="calm" selected>🌿 Calm</option>
+    <option value="happy">😊 Happy</option>
+    <option value="sad">😔 Sad</option>
+    <option value="anxious">😰 Anxious</option>
+    <option value="motivated">🔥 Motivated</option>
+  </select>
+
+  {% if user.is_authenticated %}
+
+  <div class="compose-card">
+    <span class="compose-eyebrow">share a thought</span>
+    <form id="post-form" class="post-form">
+      {% csrf_token %}
+      <input type="hidden" name="form_type" value="post" />
+      <textarea
+        id="content"
+        name="content"
+        placeholder="What's on your mind today? Let it out, softly…"
+        required
+      ></textarea>
+      <div class="compose-footer">
+        <span class="compose-hint"
+          >Only this community can see your words.</span
+        >
+        <button type="submit">Post</button>
+      </div>
+    </form>
+  </div>
+
+  {% else %}
+  <!-- BIG VISIBLE LOGIN NUDGE -->
+  <div class="login-nudge">
+    <span class="login-nudge-icon">💜</span>
+    <span class="login-nudge-title"
+      >This is a space to breathe, share, and be heard.</span
+    >
+    <span class="login-nudge-sub">
+      Sign in to share your thoughts and connect with others who understand. No
+      pressure — just gentle presence.
+    </span>
+    <div class="login-nudge-btns">
+      <a href="/login/" class="btn-login">Get Started</a>
+      <a href="/register/" class="btn-signup">Create Account</a>
+    </div>
+  </div>
+  {% endif %}
+
+  <!-- ── POSTS ── -->
+  <span class="section-label">gentle voices</span>
+
+  <div class="posts" id="posts-container">
+    <!-- Posts will be dynamically loaded here -->
+  </div>
+
+  <div class="pagination-controls">
+    <button id="prev-btn">⬅ Previous</button>
+    <button id="next-btn">Next ➡</button>
+  </div>
+</div>
+<script src="{% static 'js/api_community.js' %}"></script>
+{% endblock %}

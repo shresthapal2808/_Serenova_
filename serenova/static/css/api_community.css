@@ -1,0 +1,799 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@300;400;500&display=swap');
+
+body {
+    background: url('/static/images/api_community-bg.png') no-repeat center center fixed !important;
+    background-size: cover !important;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+
+    background: rgba(20, 8, 40, 0.65);
+    /* adjust opacity */
+
+    z-index: 0;
+}
+
+.page {
+    position: relative;
+    z-index: 1;
+}
+
+
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* ─── BASE ─── */
+body {
+    background:
+        linear-gradient(145deg,
+            #2a1245 0%,
+            #3d1a6e 20%,
+            #4a1560 45%,
+            #2e0d4a 70%,
+            #1e0d38 100%);
+    background-attachment: fixed;
+    min-height: 100vh;
+    font-family: 'Jost', sans-serif;
+    color: #e8deff;
+}
+
+/* ─── PAGE ─── */
+.api_community-container {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 52px 24px 80px;
+}
+
+/* ─── HEADING ─── */
+.api_community-container>h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.6rem;
+    font-weight: 300;
+    color: #f0eaff;
+    line-height: 1.2;
+    margin-bottom: 6px;
+    margin-top: 30px;
+}
+
+.api_community-container>h2 em {
+    font-style: italic;
+    color: #c9a8f0;
+}
+
+.page-tagline {
+    font-size: 11px;
+    font-weight: 300;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: #a890cc;
+    display: block;
+    margin-bottom: 34px;
+}
+
+/* ─── SAFE BANNER ─── */
+.safe-banner {
+    background: rgba(180, 140, 240, 0.1);
+    border: 1px solid rgba(200, 160, 255, 0.22);
+    border-radius: 20px;
+    padding: 18px 22px;
+    margin-bottom: 28px;
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+}
+
+.safe-banner-icon {
+    width: 40px;
+    height: 40px;
+    background: rgba(180, 140, 240, 0.18);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-size: 18px;
+    border: 1px solid rgba(200, 160, 255, 0.2);
+}
+
+.safe-banner-title {
+    font-size: 13px;
+    font-weight: 500;
+    color: #d4b8f8;
+    display: block;
+    margin-bottom: 5px;
+    letter-spacing: 0.3px;
+}
+
+.safe-banner-desc {
+    font-size: 13px;
+    font-weight: 300;
+    color: #b8a0d8;
+    line-height: 1.65;
+}
+
+/* ─── LOGIN NUDGE (big, visible) ─── */
+.login-nudge {
+    background: rgba(155, 100, 220, 0.15);
+    border: 1px solid rgba(180, 140, 255, 0.3);
+    border-radius: 20px;
+    padding: 24px 28px;
+    margin-bottom: 28px;
+    text-align: center;
+}
+
+.login-nudge-icon {
+    font-size: 28px;
+    display: block;
+    margin-bottom: 12px;
+}
+
+.login-nudge-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.35rem;
+    font-weight: 300;
+    font-style: italic;
+    color: #e0d0ff;
+    display: block;
+    margin-bottom: 8px;
+}
+
+.login-nudge-sub {
+    font-size: 13px;
+    font-weight: 300;
+    color: #b8a8d8;
+    display: block;
+    margin-bottom: 20px;
+    line-height: 1.6;
+}
+
+.login-nudge-btns {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.btn-login {
+    padding: 11px 32px;
+    background: linear-gradient(135deg, #9b70cc, #c47ab8);
+    border: none;
+    border-radius: 50px;
+    color: #fff;
+    font-family: 'Jost', sans-serif;
+    font-size: 13px;
+    font-weight: 400;
+    letter-spacing: 1px;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    transition: opacity 0.2s, transform 0.15s;
+}
+
+.btn-login:hover {
+    opacity: 0.88;
+    transform: translateY(-1px);
+}
+
+.btn-signup {
+    padding: 11px 32px;
+    background: transparent;
+    border: 1px solid rgba(200, 160, 255, 0.4);
+    border-radius: 50px;
+    color: #c9a8f0;
+    font-family: 'Jost', sans-serif;
+    font-size: 13px;
+    font-weight: 400;
+    letter-spacing: 1px;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    transition: all 0.2s;
+}
+
+.btn-signup:hover {
+    background: rgba(200, 160, 255, 0.1);
+    border-color: rgba(200, 160, 255, 0.65);
+}
+
+/* ─── INLINE LOCK (inside post cards) ─── */
+.lock-inline {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(155, 100, 220, 0.1);
+    border: 1px solid rgba(180, 140, 255, 0.2);
+    border-radius: 14px;
+    padding: 12px 16px;
+    margin: 8px 0;
+}
+
+.lock-inline-text {
+    font-size: 13px;
+    font-weight: 300;
+    color: #b8a8d8;
+}
+
+.lock-inline-text a {
+    color: #c9a8f0;
+    font-weight: 500;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(200, 160, 255, 0.4);
+    transition: border-color 0.2s;
+}
+
+.lock-inline-text a:hover {
+    border-color: #c9a8f0;
+}
+
+/* ─── COMPOSE CARD ─── */
+.compose-card {
+    background: rgba(185, 132, 237, 0.386);
+    border: 1px solid rgba(200, 160, 255, 0.2);
+    border-radius: 24px;
+    padding: 26px;
+    margin-bottom: 36px;
+    width: 100%;
+}
+
+.compose-eyebrow {
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #c9a8f0;
+    opacity: 0.85;
+    display: block;
+    margin-bottom: 14px;
+}
+
+/* ─── POST FORM ─── */
+.post-form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.post-form textarea {
+    display: block;
+    width: 100%;
+    min-height: 110px;
+    padding: 16px 18px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(200, 160, 255, 0.2);
+    border-radius: 16px;
+    color: #e8deff;
+    font-family: 'Jost', sans-serif;
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 1.7;
+    resize: vertical;
+    outline: none;
+    transition: border-color 0.25s, background 0.25s;
+}
+
+.post-form textarea::placeholder {
+    color: rgba(200, 170, 255, 0.35);
+}
+
+.post-form textarea:focus {
+    border-color: rgba(200, 160, 255, 0.5);
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.compose-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 14px;
+    width: 100%;
+}
+
+.compose-hint {
+    font-size: 11px;
+    color: rgba(180, 150, 220, 0.6);
+    font-weight: 300;
+    font-style: italic;
+}
+
+.post-form .compose-footer button[type="submit"] {
+    padding: 11px 30px;
+    background: linear-gradient(135deg, #9b70cc, #c47ab8);
+    border: none;
+    border-radius: 50px;
+    color: #fff;
+    font-family: 'Jost', sans-serif;
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: opacity 0.2s ease, transform 0.15s ease;
+    flex-shrink: 0;
+}
+
+.post-form .compose-footer button[type="submit"]:hover {
+    opacity: 0.88;
+    transform: translateY(-1px);
+}
+
+/* ─── SECTION LABEL ─── */
+.section-label {
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #c9a8f0;
+    opacity: 0.6;
+    display: block;
+    margin-bottom: 16px;
+}
+
+/* ─── POST CARD ─── */
+.post-card {
+    /* background: rgba(255, 255, 255, 0.05); */
+    position: relative;
+    background: rgba(180, 140, 255, 0.2);
+    border: 1px solid rgba(200, 160, 255, 0.16);
+    border-radius: 24px;
+    padding: 24px;
+    margin-bottom: 16px;
+    width: 100%;
+    /* transition: border-color 0.2s ease, background 0.2s ease; */
+}
+
+/* .post-card:hover {
+    border-color: rgba(200, 160, 255, 0.32);
+    background: rgba(255, 255, 255, 0.07);
+} */
+
+/* ─── POST HEADER ─── */
+.post-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 14px;
+}
+
+.post-avatar {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, rgba(155, 112, 204, 0.4), rgba(196, 122, 184, 0.3));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 15px;
+    font-weight: 500;
+    color: #e0d0ff;
+    flex-shrink: 0;
+    border: 1.5px solid rgba(200, 160, 255, 0.3);
+    text-transform: uppercase;
+}
+
+.post-meta {
+    flex: 1;
+}
+
+.post-meta h4 {
+    font-size: 14px;
+    font-weight: 500;
+    color: #e8deff;
+    font-family: 'Jost', sans-serif;
+}
+
+.post-meta small {
+    font-size: 11px;
+    color: rgba(180, 150, 220, 0.6);
+    font-weight: 300;
+    display: block;
+    margin-top: 2px;
+}
+
+.post-content {
+    font-size: 14px;
+    font-weight: 300;
+    color: #cdc0ee;
+    line-height: 1.8;
+    margin-bottom: 18px;
+}
+
+/* ─── REACTIONS ─── */
+.reactions {
+    margin-bottom: 12px;
+}
+
+.reactions form {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 10px;
+}
+
+.reactions button {
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(200, 160, 255, 0.18);
+    border-radius: 14px;
+    padding: 8px 13px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.18s ease;
+    font-family: 'Jost', sans-serif;
+    line-height: 1;
+}
+
+.reactions button:hover {
+    background: rgba(180, 140, 240, 0.18);
+    border-color: rgba(200, 160, 255, 0.45);
+    transform: scale(1.09);
+}
+
+.reaction-counts {
+    font-size: 12px;
+    color: rgba(180, 150, 220, 0.7);
+    font-weight: 300;
+    letter-spacing: 0.4px;
+    margin-bottom: 12px;
+}
+
+/* ─── DIVIDER ─── */
+.post-divider {
+    border: none;
+    border-top: 1px solid rgba(200, 160, 255, 0.1);
+    margin: 14px 0;
+}
+
+/* ─── COMMENTS ─── */
+.comments {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(200, 160, 255, 0.12);
+    border-radius: 16px;
+    padding: 14px 16px;
+    margin-bottom: 14px;
+    width: 100%;
+}
+
+.comments p {
+    font-size: 13px;
+    color: #b8a8d8;
+    font-weight: 300;
+    line-height: 1.6;
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(200, 160, 255, 0.08);
+}
+
+.comments p:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.comments p b {
+    font-weight: 500;
+    color: #d4b8f8;
+}
+
+.comments .empty-comment {
+    font-size: 12px;
+    color: rgba(180, 150, 220, 0.45);
+    font-style: italic;
+    font-weight: 300;
+    text-align: center;
+    padding: 6px 0;
+    border: none;
+    display: block;
+}
+
+/* ─── COMMENT FORM ─── */
+.comment-form {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    width: 100%;
+}
+
+.comment-form input[type="text"] {
+    flex: 1;
+    min-width: 0;
+    padding: 10px 16px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(200, 160, 255, 0.18);
+    border-radius: 50px;
+    font-family: 'Jost', sans-serif;
+    font-size: 13px;
+    font-weight: 300;
+    color: #e8deff;
+    outline: none;
+    transition: border-color 0.2s ease, background 0.2s;
+}
+
+.comment-form input[type="text"]::placeholder {
+    color: rgba(200, 170, 255, 0.32);
+}
+
+.comment-form input[type="text"]:focus {
+    border-color: rgba(200, 160, 255, 0.45);
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.comment-form button[type="submit"] {
+    flex-shrink: 0;
+    padding: 10px 22px;
+    background: rgba(155, 112, 204, 0.22);
+    border: 1px solid rgba(200, 160, 255, 0.32);
+    border-radius: 50px;
+    color: #d4b8f8;
+    font-family: 'Jost', sans-serif;
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: 0.8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+}
+
+.comment-form button[type="submit"]:hover {
+    background: rgba(155, 112, 204, 0.38);
+    border-color: rgba(200, 160, 255, 0.55);
+    color: #e8deff;
+}
+
+/* ─── DELETE ─── */
+.delete-btn {
+    background: none;
+    border: none;
+    font-size: 11px;
+    color: white;
+    cursor: pointer;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    padding: 4px 0;
+    transition: color 0.2s ease;
+    font-family: 'Jost', sans-serif;
+    font-weight: 300;
+}
+
+.delete-btn:hover {
+    color: rgba(200, 160, 255, 0.75);
+}
+
+/* ─── EMPTY STATE ─── */
+.empty-state {
+    text-align: center;
+    padding: 56px 24px;
+    color: rgba(180, 150, 220, 0.45);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem;
+    font-weight: 300;
+    font-style: italic;
+}
+
+
+#next-btn{
+    background: linear-gradient(135deg, #de1fa8, #c47ab8);
+    border-radius: 50px;
+    padding: 10px;
+    color: white;
+    font-family: 'playfair display', serif;
+    font-style:italic;
+}
+#prev-btn {
+    background: linear-gradient(135deg, #de1fa8, #c47ab8);
+    border-radius: 50px;
+    padding: 10px;
+    color: white;
+    font-family: 'playfair display', serif;
+    font-style: italic;
+}
+
+#mood-filter{
+    background: linear-gradient(135deg, #de1fa8, #c47ab8);
+    border: 1px solid rgba(200, 160, 255, 0.2);
+    border-radius: 16px;
+    padding: 8px 10px;
+    color: #3f13ed;
+    font-family: 'Jost', sans-serif;
+    font-size: 15px;
+    font-weight: 500;
+    outline: none;
+    font-style:bold;
+    transition: border-color 0.2s ease, background 0.2s;
+    margin-bottom: 24px;
+    display: inline-block;
+}
+
+.delete-btn{
+    /* background: linear-gradient(135deg, rgb(115, 63, 218), rgb(205, 15, 226)); */
+    background: transparent;
+    color: white;
+    font-weight: 500;
+    font-style: bold;
+    font-size:12px;
+    padding: 10px;
+    border-radius: 16px;
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    text-transform: none;
+
+}
+
+.post-date {
+    font-size: 11px;
+    color: white;
+    font-weight: 400;
+    letter-spacing: 0.3px;
+}
+
+.edit-btn {
+    position: absolute;
+    /* THIS was missing */
+    /* min-width: 60px; */
+    top: 16px;
+    right: 100px;
+    /* move left so it sits beside delete */
+    text-align: center;
+    /* background: linear-gradient(135deg, rgb(115, 63, 218), rgb(205, 15, 226)); */
+    background: transparent;
+    color: white;
+    padding: 7px 16px;
+    border-radius: 16px;
+    border: none;
+    cursor: pointer;
+    font-size: 12px;
+}
+
+.edit-area{
+    width: 100%;
+    min-height: 100px;
+    padding: 16px 18px;
+    background: linear-gradient(135deg, rgba(172, 16, 186, 0.47));
+    border: 1px solid rgba(200, 160, 255, 0.2);
+    border-radius: 16px;
+    color: #e8deff;
+    font-family: 'Jost', sans-serif;
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 1.7;
+    resize: vertical;
+    outline: none;
+    transition: border-color 0.25s, background 0.25s;
+}
+
+.save-btn{
+    background: linear-gradient(135deg, rgb(115, 63, 218), rgb(205, 15, 226));
+    color: white;
+    font-weight: 500;
+    font-style: bold;
+    padding: 4px 8px;
+    border-radius: 16px;
+    border: none;
+    cursor: pointer;
+    margin-top: 12px;
+    min-width: 100px;
+}
+
+/* ─── MEDIA QUERIES(edit and delete buttons) ─── */
+@media (max-width: 500px) {
+    .edit-btn {
+        top: 50px;
+        /* push below delete */
+        right: 16px;
+        min-width: 56px;
+        font-size: 10px;
+        padding: 1px 2px;
+    }
+
+    .delete-btn {
+        font-size: 8px;
+        padding: 6px 10px;
+    }
+}
+
+.add-comment-btn {
+    background: linear-gradient(135deg, rgb(115, 63, 218), rgb(205, 15, 226));
+    color: white;
+    font-weight: 500;
+    font-style: bold;
+    padding: 6px 14px;
+    border-radius: 16px;
+    border: none;
+    cursor: pointer;
+    font-size: 12px;
+} 
+
+.comment {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 6px;
+}
+
+.comment-delete-btn {
+    background: transparent;
+    border: none;
+    color: #ff6b81;
+    font-size: 14px;
+    cursor: pointer;
+    padding: 4px;
+    transition: 0.2s;
+}
+
+.comment-delete-btn:hover {
+    color: #ff1e4d;
+    transform: scale(1.1);
+}*/
+
+.comment {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 8px;
+}
+
+.comment-text {
+    flex: 1;
+    font-size: 14px;
+    color: #eee;
+}
+
+.comment-delete-btn {
+    background: transparent;
+    border: none;
+    color: #ff6b81;
+    font-size: 16px;
+    cursor: pointer;
+    padding: 4px;
+    transition: 0.2s;
+}
+
+.comment-delete-btn:hover {
+    color: #ff1e4d;
+    transform: scale(1.2);
+}
+
+.comment-input-box {
+    display: flex;
+    gap: 8px;
+    margin-top: 10px;
+}
+
+.comment-input-box input {
+    flex: 1;
+    padding: 8px 12px;
+    border-radius: 20px;
+    border: none;
+    outline: none;
+    font-size: 13px;
+    background: rgba(255, 255, 255, 0.15);
+    color: white;
+}
+
+.comment-input-box input::placeholder {
+    color: #ccc;
+}
+
+.comment-delete-btn {
+    background: transparent;
+    border: none;
+    color: #ff6b81;
+    font-size: 16px;
+    cursor: pointer;
+    padding: 4px;
+    transition: 0.2s;
+}
+
+.comment-delete-btn:hover {
+    color: #ff1e4d;
+    transform: scale(1.2);
+}
+
+.add-comment-btn{
+    background: linear-gradient();
+}

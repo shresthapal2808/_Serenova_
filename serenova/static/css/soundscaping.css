@@ -1,0 +1,626 @@
+:root {
+    --deep: #1a0f2e;
+    --deeper: #110a1f;
+    --dark: #0e0818;
+    --lv2: #e8deff;
+    --lv3: #c9b8f4;
+    --bloom: #b99de8;
+    --mist: #ede8f9;
+    --lilac: #d8c6f0;
+    --pink: #e8c6d8;
+    --rose: #d4a8c4;
+    --glow: #a78bdc;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    min-height: 100vh;
+    font-family: 'Jost', sans-serif;
+    color: var(--mist);
+    overflow-x: hidden;
+    background: var(--dark);
+}
+
+/* ── WRAP & BACKGROUND ── */
+.sc-wrap {
+    min-height: 100vh;
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 60px 20px 80px;
+    background:
+        radial-gradient(ellipse 80% 60% at 20% 10%, rgba(124, 92, 184, 0.38) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 50% at 80% 80%, rgba(167, 139, 220, 0.22) 0%, transparent 55%),
+        radial-gradient(ellipse 40% 40% at 50% 50%, rgba(212, 168, 196, 0.07) 0%, transparent 50%),
+        linear-gradient(160deg, #1a0f2e 0%, #0e0818 60%, #130a22 100%);
+}
+
+/* AMBIENT RINGS */
+.ring {
+    position: fixed;
+    border-radius: 50%;
+    border: 1px solid rgba(167, 139, 220, 0.08);
+    pointer-events: none;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation: pulse-ring 8s ease-in-out infinite;
+}
+
+.ring-1 {
+    width: 400px;
+    height: 400px;
+    animation-delay: 0s;
+}
+
+.ring-2 {
+    width: 700px;
+    height: 700px;
+    animation-delay: 2s;
+    border-color: rgba(167, 139, 220, 0.05);
+}
+
+.ring-3 {
+    width: 1000px;
+    height: 1000px;
+    animation-delay: 4s;
+    border-color: rgba(167, 139, 220, 0.03);
+}
+
+@keyframes pulse-ring {
+
+    0%,
+    100% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 1;
+    }
+
+    50% {
+        transform: translate(-50%, -50%) scale(1.04);
+        opacity: 0.5;
+    }
+}
+
+/* PARTICLES */
+.particles {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.particles span {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background: var(--bloom);
+    border-radius: 50%;
+    opacity: 0;
+    animation: float-up 12s ease-in infinite;
+}
+
+.particles span:nth-child(1) {
+    left: 15%;
+    animation-delay: 0s;
+    animation-duration: 14s;
+}
+
+.particles span:nth-child(2) {
+    left: 35%;
+    animation-delay: 3s;
+    animation-duration: 11s;
+}
+
+.particles span:nth-child(3) {
+    left: 55%;
+    animation-delay: 6s;
+    animation-duration: 16s;
+}
+
+.particles span:nth-child(4) {
+    left: 70%;
+    animation-delay: 1s;
+    animation-duration: 13s;
+}
+
+.particles span:nth-child(5) {
+    left: 85%;
+    animation-delay: 4s;
+    animation-duration: 10s;
+}
+
+.particles span:nth-child(6) {
+    left: 5%;
+    animation-delay: 8s;
+    animation-duration: 15s;
+}
+
+@keyframes float-up {
+    0% {
+        bottom: -10px;
+        opacity: 0;
+    }
+
+    10% {
+        opacity: 0.6;
+    }
+
+    90% {
+        opacity: 0.2;
+    }
+
+    100% {
+        bottom: 100vh;
+        opacity: 0;
+    }
+}
+
+/* INNER */
+.sc-inner {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 720px;
+}
+
+/* ── HEADER ── */
+.sc-header {
+    text-align: center;
+    margin-bottom: 52px;
+}
+
+.sc-eyebrow {
+    font-size: 10px;
+    font-weight: 400;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--bloom);
+    opacity: 0.7;
+    margin-bottom: 16px;
+}
+
+.sc-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3rem, 8vw, 5rem);
+    font-weight: 300;
+    color: var(--mist);
+    line-height: 1.1;
+    margin-bottom: 14px;
+}
+
+.sc-title em {
+    font-style: italic;
+    color: var(--bloom);
+}
+
+.sc-sub {
+    font-size: 13px;
+    font-weight: 300;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--mist);
+    opacity: 0.5;
+}
+
+/* ── SEARCH ── */
+.search-row {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 32px;
+}
+
+.search-field {
+    flex: 1;
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.search-icon {
+    position: absolute;
+    left: 18px;
+    color: var(--glow);
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+.search-field input {
+    width: 100%;
+    padding: 15px 18px 15px 46px;
+    background: rgba(167, 139, 220, 0.06);
+    border: 1px solid rgba(167, 139, 220, 0.18);
+    border-radius: 50px;
+    color: var(--mist);
+    font-family: 'Jost', sans-serif;
+    font-size: 14px;
+    font-weight: 300;
+    letter-spacing: 0.5px;
+    outline: none;
+    transition: border-color 0.3s, background 0.3s;
+}
+
+.search-field input::placeholder {
+    color: rgba(216, 198, 240, 0.3);
+}
+
+.search-field input:focus {
+    border-color: rgba(167, 139, 220, 0.4);
+    background: rgba(167, 139, 220, 0.09);
+}
+
+.search-btn {
+    padding: 15px 28px;
+    background: linear-gradient(135deg, rgba(167, 139, 220, 0.25), rgba(92, 45, 142, 0.5));
+    border: 1px solid rgba(167, 139, 220, 0.3);
+    border-radius: 50px;
+    color: var(--mist);
+    font-family: 'Jost', sans-serif;
+    font-size: 13px;
+    font-weight: 400;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    white-space: nowrap;
+}
+
+.search-btn:hover {
+    background: linear-gradient(135deg, rgba(167, 139, 220, 0.4), rgba(92, 45, 142, 0.7));
+    border-color: rgba(167, 139, 220, 0.5);
+    box-shadow: 0 0 20px rgba(167, 139, 220, 0.2);
+}
+
+/* ── SOUND LIBRARY ── */
+.sound-library {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 12px;
+    margin-bottom: 32px;
+}
+
+/* ── SOUND CARD — fixed overflow ── */
+.sound-card {
+    background: rgba(167, 139, 220, 0.06);
+    border: 1px solid rgba(167, 139, 220, 0.14);
+    border-radius: 20px;
+    padding: 16px 16px 14px;
+    transition: all 0.25s ease;
+    animation: fade-up 0.4s ease both;
+    /* KEY: card is a flex column so content never escapes */
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    min-width: 0;
+    /* allows children to shrink below natural size */
+}
+
+.sound-card:hover {
+    background: rgba(167, 139, 220, 0.11);
+    border-color: rgba(167, 139, 220, 0.28);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(92, 45, 142, 0.2);
+}
+
+@keyframes fade-up {
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Sound name — clamp to 2 lines max, no overflow */
+.sound-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 15px;
+    font-weight: 400;
+    color: var(--lilac);
+    display: -webkit-box;
+    /* -webkit-line-clamp: 2; */
+    /* max 2 lines */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 1.4;
+    min-height: 2.8em;
+    /* reserve space for 2 lines so all cards same height */
+    word-break: break-word;
+}
+
+/* Audio player — constrained to card width */
+.sound-card audio {
+    width: 100%;
+    height: 28px;
+    accent-color: var(--glow);
+    display: block;
+}
+
+.add-btn {
+    width: 100%;
+    padding: 9px;
+    background: transparent;
+    border: 1px solid rgba(167, 139, 220, 0.22);
+    border-radius: 10px;
+    color: var(--glow);
+    font-family: 'Jost', sans-serif;
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    margin-top: auto;
+    /* push to bottom so all cards align */
+}
+
+.add-btn:hover {
+    background: rgba(167, 139, 220, 0.12);
+    border-color: rgba(167, 139, 220, 0.4);
+    color: var(--lilac);
+}
+
+/* ── MIXER ── */
+.mixer-section {
+    background: rgba(26, 15, 46, 0.75);
+    border: 1px solid rgba(167, 139, 220, 0.14);
+    border-radius: 24px;
+    padding: 28px;
+    margin-bottom: 32px;
+    backdrop-filter: blur(12px);
+}
+
+.mixer-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 24px;
+}
+
+.mixer-label {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 300;
+    font-style: italic;
+    color: var(--mist);
+}
+
+.mixer-controls {
+    display: flex;
+    gap: 8px;
+}
+
+.ctrl-btn {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 16px;
+    border-radius: 50px;
+    font-family: 'Jost', sans-serif;
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: 1px solid transparent;
+}
+
+.play-btn {
+    background: rgba(167, 139, 220, 0.15);
+    border-color: rgba(167, 139, 220, 0.35);
+    color: var(--glow);
+}
+
+.play-btn:hover {
+    background: rgba(167, 139, 220, 0.28);
+    box-shadow: 0 0 16px rgba(167, 139, 220, 0.25);
+}
+
+.stop-btn {
+    background: rgba(212, 169, 106, 0.1);
+    border-color: rgba(212, 169, 106, 0.2);
+    color: #d4a96a;
+}
+
+.stop-btn:hover {
+    background: rgba(212, 169, 106, 0.2);
+}
+
+.save-btn {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(216, 198, 240, 0.15);
+    color: var(--mist);
+}
+
+.save-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+/* TRACKS */
+.mixer-tracks {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* ── MIX ITEM — equal slider width fix ── */
+.mix-item {
+    display: grid;
+    /* fixed name col | fixed slider col | fixed remove col */
+    grid-template-columns: 130px 1fr 28px;
+    align-items: center;
+    gap: 14px;
+    padding: 13px 16px;
+    background: rgba(167, 139, 220, 0.05);
+    border: 1px solid rgba(167, 139, 220, 0.1);
+    border-radius: 14px;
+    animation: fade-up 0.3s ease both;
+    min-width: 0;
+}
+
+/* Track name — truncate with ellipsis, never wrap */
+.mix-track-name {
+    font-size: 12px;
+    font-weight: 300;
+    color: var(--mist);
+    text-transform: capitalize;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    /* no flex-shrink here — grid handles sizing */
+}
+
+/* Slider — always full width of its grid cell */
+.mix-item input[type=range] {
+    width: 100%;
+    /* fills the 1fr cell exactly */
+    appearance: none;
+    -webkit-appearance: none;
+    height: 3px;
+    background: linear-gradient(90deg,
+            var(--glow) var(--val, 50%),
+            rgba(167, 139, 220, 0.15) var(--val, 50%));
+    border-radius: 2px;
+    outline: none;
+    cursor: pointer;
+    display: block;
+}
+
+.mix-item input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: var(--glow);
+    box-shadow: 0 0 8px rgba(167, 139, 220, 0.5);
+    cursor: pointer;
+}
+
+.mix-item input[type=range]::-moz-range-thumb {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: var(--glow);
+    box-shadow: 0 0 8px rgba(167, 139, 220, 0.5);
+    cursor: pointer;
+    border: none;
+}
+
+.remove-btn {
+    background: none;
+    border: none;
+    color: rgba(216, 198, 240, 0.3);
+    font-size: 15px;
+    cursor: pointer;
+    transition: color 0.2s;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.remove-btn:hover {
+    color: rgba(212, 169, 106, 0.8);
+}
+
+/* ── SAVED MIXES ── */
+.saved-section {
+    margin-top: 8px;
+}
+
+.saved-label {
+    font-size: 10px;
+    font-weight: 400;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--glow);
+    opacity: 0.6;
+    margin-bottom: 14px;
+    display: block;
+}
+
+.saved-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.mix-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 16px 20px;
+    background: rgba(167, 139, 220, 0.05);
+    border: 1px solid rgba(167, 139, 220, 0.12);
+    border-radius: 16px;
+    transition: all 0.2s ease;
+    min-width: 0;
+}
+
+.mix-card:hover {
+    background: rgba(167, 139, 220, 0.1);
+    border-color: rgba(167, 139, 220, 0.25);
+}
+
+.mix-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-width: 0;
+    /* allow text to truncate */
+    flex: 1;
+}
+
+.mix-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--glow);
+    opacity: 0.5;
+    flex-shrink: 0;
+}
+
+.mix-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 17px;
+    font-weight: 400;
+    color: var(--mist);
+    text-transform: capitalize;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.mix-play-btn {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 18px;
+    background: rgba(167, 139, 220, 0.1);
+    border: 1px solid rgba(167, 139, 220, 0.28);
+    border-radius: 50px;
+    color: var(--glow);
+    font-family: 'Jost', sans-serif;
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    flex-shrink: 0;
+}
+
+.mix-play-btn:hover {
+    background: rgba(167, 139, 220, 0.22);
+    box-shadow: 0 0 16px rgba(167, 139, 220, 0.2);
+}

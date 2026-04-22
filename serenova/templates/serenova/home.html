@@ -1,0 +1,355 @@
+{% extends "serenova/base.html" %} {% load static %} {% block content %}
+
+<!-- ===== HERO SECTION ===== -->
+<section class="hero" id="home">
+  <!-- Image with orbital rings -->
+  <div class="image-container">
+    <div class="hero-glow"></div>
+    <div class="hero-ring hero-ring-1"></div>
+    <div class="hero-ring hero-ring-2"></div>
+    <div class="hero-ring hero-ring-3"></div>
+    <div class="orb-dot"></div>
+    <img src="{% static 'images/hero.png' %}" class="hero-img" alt="Serenova" />
+  </div>
+
+  <!-- Hero text -->
+  <div class="hero-text">
+    <span class="hero-eyebrow">your sanctuary awaits</span>
+    <h1>SERENOVA</h1>
+    <div class="hero-tagline">peace · clarity · renewal</div>
+    <p>
+      Welcome to Serenova — your personal mental wellness space. Relax your
+      mind, track your mood, and explore activities that help you feel better
+      every day.
+    </p>
+    <div class="hero-divider">
+      <div class="hdiv-line"></div>
+      <div class="hdiv-gem"></div>
+      <div class="hdiv-line r"></div>
+    </div>
+    <a href="#target" class="hero-btn" style="text-decoration: none">
+      Explore More
+      <svg
+        viewBox="0 0 16 16"
+        fill="none"
+        stroke="white"
+        stroke-width="1.5"
+        stroke-linecap="round"
+      >
+        <path d="M3 8h10M9 4l4 4-4 4" />
+      </svg>
+    </a>
+  </div>
+
+  {% comment %}
+  <!-- Scroll indicator -->
+  <div class="scroll-hint">
+    <span>Scroll</span>
+    <div class="scroll-mouse"><div class="scroll-dot"></div></div>
+  </div>
+  {% endcomment %}
+</section>
+
+<!-- ===== MARQUEE BAND ===== -->
+<div class="band">
+  <div class="marquee-track">
+    <div class="marquee-item">
+      <div class="marquee-gem"></div>
+      Relaxing Soundscapes
+    </div>
+    <div class="marquee-item">
+      <div class="marquee-gem"></div>
+      Mood Tracking
+    </div>
+    <div class="marquee-item">
+      <div class="marquee-gem"></div>
+      Daily Affirmations
+    </div>
+    <div class="marquee-item">
+      <div class="marquee-gem"></div>
+      Wellness Community
+    </div>
+    <div class="marquee-item">
+      <div class="marquee-gem"></div>
+      Mental Insights
+    </div>
+    <div class="marquee-item">
+      <div class="marquee-gem"></div>
+      Thought Sharing
+    </div>
+    <div class="marquee-item">
+      <div class="marquee-gem"></div>
+      Inner Stillness
+    </div>
+    <div class="marquee-item">
+      <div class="marquee-gem"></div>
+      Guided Breathing
+    </div>
+    <!-- Duplicate for seamless loop -->
+    <div class="marquee-item">
+      <div class="marquee-gem"></div>
+      Relaxing Soundscapes
+    </div>
+    <div class="marquee-item">
+      <div class="marquee-gem"></div>
+      Mood Tracking
+    </div>
+    <div class="marquee-item">
+      <div class="marquee-gem"></div>
+      Daily Affirmations
+    </div>
+    <div class="marquee-item">
+      <div class="marquee-gem"></div>
+      Wellness Community
+    </div>
+    <div class="marquee-item">
+      <div class="marquee-gem"></div>
+      Mental Insights
+    </div>
+    <div class="marquee-item">
+      <div class="marquee-gem"></div>
+      Thought Sharing
+    </div>
+    <div class="marquee-item">
+      <div class="marquee-gem"></div>
+      Inner Stillness
+    </div>
+    <div class="marquee-item">
+      <div class="marquee-gem"></div>
+      Guided Breathing
+    </div>
+  </div>
+</div>
+
+<!-- ===== SUB-HERO / FEATURES SECTION ===== -->
+<section class="subhero-section" id="features">
+  <!-- Left features -->
+  <div class="features left">
+    <div class="feature reveal">
+      <div class="feat-icon-wrap">🎵</div>
+      <h3>Relaxing Music</h3>
+      <p>
+        Calm your mind with curated soothing music and soundscapes tailored to
+        your mood.
+      </p>
+    </div>
+    <div class="feature reveal" style="transition-delay: 0.15s">
+      <div class="feat-icon-wrap">💬</div>
+      <h3>Thought Sharing</h3>
+      <p>
+        Express yourself freely and connect with a gentle, supportive community.
+      </p>
+    </div>
+  </div>
+
+  <!-- Center meditation image -->
+  <div class="center-image reveal" style="transition-delay: 0.1s">
+    <div class="med-glow"></div>
+    <div class="breathe-wrapper">
+      <img src="{% static 'images/sub-hero.png' %}" alt="Meditation" />
+    </div>
+  </div>
+
+  <!-- Right features -->
+  <div class="features right">
+    <div class="feature reveal" style="transition-delay: 0.2s">
+      <div class="feat-icon-wrap">📒</div>
+      <h3>Journaling</h3>
+      <p>
+        Write down your thoughts in private, capturing how you feel.
+      </p>
+    </div>
+    <div class="feature reveal" style="transition-delay: 0.3s">
+      <div class="feat-icon-wrap">✨</div>
+      <h3>Daily Positivity</h3>
+      <p>
+        Receive uplifting quotes and affirmations curated just for your mood.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== DIVIDER ===== -->
+<div class="divider">
+  <div class="div-line"></div>
+  <div class="div-gem sm"></div>
+  <div class="div-gem"></div>
+  <div class="div-gem sm"></div>
+  <div class="div-line"></div>
+</div>
+
+<!-- ===== CARDS SECTION ===== -->
+<section class="target-section" id="target">
+  <span class="target-eyebrow">begin your journey</span>
+  <h2 class="target-heading reveal">How Serenova Helps You</h2>
+  <p class="target-sub">Three pathways to your inner calm</p>
+
+  <div class="card-container">
+    <div
+      class="card reveal"
+      style="transition-delay: 0s"
+      onclick="handleNavigation('/soundscape')"
+    >
+      <div class="card-img-zone">
+        <img src="{% static 'images/music.png' %}" alt="Soundscaping" />
+      </div>
+      <h3>Soundscaping</h3>
+      <p>Create your perfect calm vibe with our interactive sound mixer.</p>
+      <div class="card-arrow">
+        Explore
+        <svg
+          width="12"
+          height="12"
+          viewBox="0 0 12 12"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.5"
+          stroke-linecap="round"
+        >
+          <path d="M2 6h8M7 3l3 3-3 3" />
+        </svg>
+      </div>
+    </div>
+
+    <div 
+      class="card reveal"
+      style="transition-delay: 0.12s"
+      onclick="handleNavigation('/community/')">
+      <div class="card-img-zone">
+        <img src="{% static 'images/community.png' %}" alt="Community" />
+      </div>
+      <h3>Wellness Community</h3>
+      <p>
+        Share your thoughts, connect with others and find support in our safe space.
+      </p>
+      <div class="card-arrow">
+        Explore
+        <svg
+          width="12"
+          height="12"
+          viewBox="0 0 12 12"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.5"
+          stroke-linecap="round"
+        >
+          <path d="M2 6h8M7 3l3 3-3 3" />
+        </svg>
+      </div>
+    </div>
+
+    <div
+      class="card reveal"
+      style="transition-delay: 0.12s"
+      onclick="handleNavigation('/journal/')"
+    >
+      <div class="card-img-zone">
+        <img src="{% static 'images/journal.png' %}" alt="Journaling" />
+      </div>
+      <h3>Journaling</h3>
+      <p>
+        Your own personal space to reflect, vent, and celebrate your journey. Only you can see your words.
+      </p>
+      <div class="card-arrow">
+        Explore
+        <svg
+          width="12"
+          height="12"
+          viewBox="0 0 12 12"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.5"
+          stroke-linecap="round"
+        >
+          <path d="M2 6h8M7 3l3 3-3 3" />
+        </svg>
+      </div>
+    </div>
+
+    <div
+      class="card reveal"
+      style="transition-delay: 0.12s"
+      onclick="handleNavigation('/api_community/')"
+    >
+      <div class="card-img-zone">
+        <img src="{% static 'images/api_community.png' %}" alt="Journaling" />
+      </div>
+      <h3>Wellness Community(API)</h3>
+      <p>
+        Share your thoughts, connect with others and find support in our safe space.
+      </p>
+      <div class="card-arrow">
+        Explore
+        <svg
+          width="12"
+          height="12"
+          viewBox="0 0 12 12"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.5"
+          stroke-linecap="round"
+        >
+          <path d="M2 6h8M7 3l3 3-3 3" />
+        </svg>
+      </div>
+    </div>
+
+
+
+
+    <a
+      href="{% url 'quotes' %}"
+      class="card reveal"
+      style="transition-delay: 0.24s; text-decoration: none"
+    >
+      <div class="card-img-zone">
+        <img src="{% static 'images/quotes.png' %}" alt="Quotes" />
+      </div>
+      <h3>Quotes &amp; Thoughts</h3>
+      <p>Stay inspired with daily affirmations and positive thoughts.</p>
+      <div class="card-arrow">
+        Explore
+        <svg
+          width="12"
+          height="12"
+          viewBox="0 0 12 12"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.5"
+          stroke-linecap="round"
+        >
+          <path d="M2 6h8M7 3l3 3-3 3" />
+        </svg>
+      </div>
+    </a>
+  </div>
+</section>
+
+<!-- ===== QUOTE STRIP ===== -->
+<section class="quote-strip">
+  <p class="big-quote">"Pause the noise. <em>Reconnect with yourself</em>"</p>
+  <div class="quote-attr">— serenova</div>
+</section>
+
+{% endblock %} {% block scripts %}
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    // ── Scroll reveal for .reveal elements ──
+    const reveals = document.querySelectorAll(".reveal, .feature, .card");
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) entry.target.classList.add("active");
+        });
+      },
+      { threshold: 0.15 },
+    );
+    reveals.forEach((el) => observer.observe(el));
+
+    // ── Navigation handler ──
+    window.handleNavigation = function (path) {
+      window.location.href = path;
+    };
+  });
+</script>
+{% endblock %}
