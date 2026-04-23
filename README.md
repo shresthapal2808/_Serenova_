@@ -29,7 +29,7 @@ Serenova is a mental wellness platform designed to help users relax, express the
 - Django REST Framework
 
 **Database:**
-- SQLite (Development)
+- dbSQLite3 (Development)
 - PostgreSQL (Production)
 
 **Deployment:**
