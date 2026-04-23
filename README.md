@@ -54,17 +54,17 @@ git clone https://github.com/yourusername/serenova.git
 cd serenova
 ```
 2. Install dependencies
-   ```bash
-   ppip freeze > requirements.txt
-   ```
+```bash
+pip freeze > requirements.txt
+```
 3. Apply migrations
-   ```bash
-   python manage.py migrate
-   ```
+```bash
+python manage.py migrate
+```
 4. Run the development server:
-   ```bash
-   python manage.py runserver
-   ```
+```bash
+python manage.py runserver
+```
 
 
 
