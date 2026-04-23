@@ -22,7 +22,7 @@ Serenova is a mental wellness platform designed to help users relax, express the
 ### 📓 Journaling with Mood Tracking
 <img width="100%" src="https://github.com/user-attachments/assets/75a923a0-c2b0-4c0b-a6de-dc23aedede92" />
 
-### 🤖 AI-generated Motivational Quotes
+### 🤖 AI-generated Motivational Quotes Based on Mood
 <img width="100%" src="https://github.com/user-attachments/assets/1c33800a-eb6f-4d47-8ee0-fe368eef6e2d" />
 
 ## 🛠️ Tech Stack
