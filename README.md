@@ -1,4 +1,4 @@
-# Serenova 🌿  
+# Serenova
 A mental wellness web application focused on relaxation, self-expression, and emotional connection.
 
 ---
