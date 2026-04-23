@@ -182,7 +182,7 @@ async function editPost(id, btn) {
 
   contentElement.innerHTML = `
     <textarea class="edit-area">${oldContent}</textarea>
-    <button onclick="saveEdit(${id}, this)">💾 Save</button>
+    <button class="save-btn" onclick="saveEdit(${id}, this)">💾 Save</button>
   `;
 }
 
