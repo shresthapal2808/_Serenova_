@@ -309,7 +309,13 @@ def journal_view(request):
 
         if not mood:
             messages.error(request, "Please select a mood before saving ✨")
-            return redirect('journal')
+            entires = JournalEntry.objects.filter(user=request.user).order_by('-created_at')
+            return render(request, 'serenova/journal.html', {
+                'entries': entires,
+                'moods': MOODS,
+                'today': timezone.now(),
+                'draft': content,  # pre-fill with unsaved content
+            })
 
         if content:
             JournalEntry.objects.create(
@@ -363,6 +369,9 @@ def journal_edit(request, pk):
         'moods':   MOODS,
         'today':   timezone.now(),
         'draft':   entry.content,   # pre-fills {{ draft }} in template
+        'edit_mode': True,
+        'entry_id': entry.id,
+        'selected_mood': entry.mood,  # to pre-select the mood in the dropdown
     }
     return render(request, 'serenova/journal.html', context)
 
@@ -375,7 +384,6 @@ def journal_delete(request, pk):
         entry.delete()
         messages.success(request, "Entry deleted.")
     return redirect('journal')
-
 
 def api_community_view(request):
     return render(request, 'serenova/api_community.html')

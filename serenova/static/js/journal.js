@@ -58,3 +58,16 @@ document.querySelectorAll('.sn-toast--show').forEach(toast => {
     toast.style.transform = 'translateY(80px)';
   }, 3000);
 });
+
+document.addEventListener("DOMContentLoaded", function () {
+    const selectedMood = "{{ selected_mood|default:'' }}";
+
+    if (selectedMood) {
+        document.querySelectorAll('.sn-mood-pill').forEach(p => {
+            if (p.textContent.trim() === selectedMood) {
+                p.classList.add('selected');
+                document.getElementById('mood-input').value = selectedMood;
+            }
+        });
+    }
+});

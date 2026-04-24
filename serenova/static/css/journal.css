@@ -407,6 +407,13 @@ body::before {
     text-transform: uppercase;
 }
 
+.sn-edited-label {
+    font-size: 11px;
+    margin-left: 8px;
+    color: white;
+    font-style: italic;
+}
+
 .sn-entry-mood {
     font-size: 15px;
     padding: 3px 10px;
